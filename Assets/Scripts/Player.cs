@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
 
         if (fireAction.WasPressedThisFrame())
         {
-            Instantiate(projectile, firePoint.transform.position, Quaternion.identity);
+            Instantiate(projectile, firePoint.transform.position, firePoint.transform.rotation);
         }
     }
 }
