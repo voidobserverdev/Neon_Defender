@@ -16,5 +16,17 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         transform.Translate(projectileSpeed * Time.deltaTime * fireDirection, Space.World);
+        OutOfBounds();
+    }
+    void OutOfBounds()
+    {
+        if (transform.position.x > 15 || transform.position.x < -15)
+        {
+            Destroy(gameObject);
+        }
+        if (transform.position.z > 15 || transform.position.z < -15)
+        {
+            Destroy(gameObject);
+        }
     }
 }
