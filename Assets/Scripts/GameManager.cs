@@ -6,10 +6,7 @@ public class GameManager : MonoBehaviour
     public float spawnRate = 2f;
     public float spawnTimer = 0;
 
-    readonly float minRange = -8f;
-    readonly float maxRange = 8f;
-    readonly float excludeMinRange = -5f;
-    readonly float excludeMaxRange = 5f;
+    private float spawnRange;
 
     void Update()
     {
@@ -29,18 +26,13 @@ public class GameManager : MonoBehaviour
 
     Vector3 SpawnPoint()
     {
-        float xPos;
-        float zPos;
-        do
-        {
-            xPos = Random.Range(minRange, maxRange);
-        }
-        while (xPos < excludeMinRange && xPos > excludeMaxRange);
-        do
-        {
-            zPos = Random.Range(minRange, maxRange);
-        }
-        while (zPos < excludeMinRange && zPos > excludeMaxRange);
-        return new Vector3(xPos, transform.position.y, zPos);
+        spawnRange = Random.Range(6, 8);
+
+        //Get a random point on edge of circle
+        Vector2 randomCirclePoint = Random.insideUnitCircle.normalized;
+
+        randomCirclePoint *= spawnRange;
+
+        return new Vector3(randomCirclePoint.x, transform.position.y, randomCirclePoint.y);
     }
 }
