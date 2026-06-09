@@ -5,11 +5,6 @@ public class Projectile : MonoBehaviour
     private GameObject player;
     public float projectileSpeed = 25f;
 
-    void Start()
-    {
-        player = GameObject.Find("Player");
-    }
-
     // Update is called once per frame
     void Update()
     {
