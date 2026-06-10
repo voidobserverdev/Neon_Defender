@@ -2,24 +2,27 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private GameObject player;
     public float projectileSpeed = 25f;
+    public float lifetime = 3f;
+
+    void Start()
+    {
+        //Destory projectiles after 3 sec, better performance
+        Destroy(gameObject, lifetime);
+    }
 
     // Update is called once per frame
     void Update()
     {
         //move forward in local space
         transform.Translate(projectileSpeed * Time.deltaTime * Vector3.forward);
-        OutOfBounds();
     }
-    void OutOfBounds()
+
+    void OnTriggerEnter(Collider other)
     {
-        if (transform.position.x > 15 || transform.position.x < -15)
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            Destroy(gameObject);
-        }
-        if (transform.position.z > 15 || transform.position.z < -15)
-        {
+            Destroy(other.gameObject);
             Destroy(gameObject);
         }
     }
